@@ -4,12 +4,19 @@ const jwt = require('jsonwebtoken')
 module.exports = {
 	signin: async (req, res) => {
 		// check email and password is exist
-		const user = await userDB.findOne({ email: req.body.email })
-		const validPassword = await bcrypt.compare(req.body.password, user.password)
-		if (!user || !validPassword) return res.status(400).send({ message: 'Email or password is not already exist' })
-		// create token
-		const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET)
-		res.header('auth-token', token).send('sucess')
+		try {
+			const user = await userDB.findOne({ email: req.body.email })
+			const validPassword = await bcrypt.compare(req.body.password, user.password)
+			if (!user || !validPassword) return res.status(400).send({ message: 'Email or password is not already exist' })
+			// create token
+			const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET)
+			res.header('auth-token', token).send({
+				token: token,
+				email: user.email,
+			})
+		} catch (error) {
+			res.status(400).send(error)
+		}
 	},
 	signup: async (req, res) => {
 		// check email exist
