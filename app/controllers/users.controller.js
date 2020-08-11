@@ -8,8 +8,11 @@ module.exports = {
 			const user = await userDB.findOne({ email: req.body.email })
 			const validPassword = await bcrypt.compare(req.body.password, user.password)
 			if (!user || !validPassword) return res.status(400).send({ message: 'Email or password is not already exist' })
+			// has serect key
+			const salt = await bcrypt.genSalt(10)
+			const hashedSerectKey = await bcrypt.hash(process.env.TOKEN_SECRET, salt)
 			// create token
-			const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET)
+			const token = jwt.sign({ _id: user._id,luan: Math.floor(Date.now() / 1000) - 30  }, hashedSerectKey)
 			res.header('auth-token', token).send({
 				token: token,
 				email: user.email,
