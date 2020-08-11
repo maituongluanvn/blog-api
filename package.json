@@ -37,5 +37,8 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "passwort": "^1.0.4"
+  },
+  "devDependencies": {
+    "prettier": "2.0.5"
   }
 }
