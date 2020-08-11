@@ -4,7 +4,7 @@ const postsDB = require('../models/posts.model')
 module.exports = {
 	get: async function (req, res, next) {
 		const data = await postsDB.find().exec()
-		res.json({ data })
+		res.json({ data: 'cac' })
 	},
 	create: async function (req, res) {
 		// const dummy = require('../models/dummy/users.json')
