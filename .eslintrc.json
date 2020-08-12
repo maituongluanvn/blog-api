@@ -1,0 +1,39 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2020": true,
+    "es6": true,
+    "node": true
+  },
+  "extends": ["airbnb", "prettier", "plugin:node/recommended", "eslint:recommended", "plugin:prettier/recommended"],
+  "plugins": ["prettier"],
+  "parserOptions": {
+    "ecmaVersion": 11
+  },
+  "rules": {
+    "prettier/prettier": "off",
+    "no-unused-vars": "warn",
+    "no-console": "warn",
+    "func-names": "off",
+    "object-shorthand": "off",
+    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "linebreak-style": ["error", "windows"],
+    "quotes": ["error", "single"],
+    "semi": ["error", "never"],
+    "import/no-dynamic-require": ["off"],
+    "import/newline-after-import": ["off"],
+    "arrow-parens": ["error", "as-needed"],
+    "max-len": ["error", 150],
+    "no-underscore-dangle": ["off"],
+    "no-multi-assign": ["off"],
+    "no-param-reassign": ["off"],
+    "consistent-return": ["off"],
+    "no-use-before-define": ["off"],
+    "no-plusplus": ["off"],
+    "class-methods-use-this": ["off"],
+    "no-extra-semi": "off",
+    "no-var": "off",
+    "switch-colon-spacing": ["error", {"after": false, "before": true}]
+  }
+}
