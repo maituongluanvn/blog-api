@@ -8,6 +8,6 @@ module.exports = function (req, res, next) {
     req.user = verify
     next()
   } catch (error) {
-    res.status(400).send( error )
+    res.status(400).send(error)
   }
 }
