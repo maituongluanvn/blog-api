@@ -8,7 +8,7 @@ module.exports = {
    * @param {*} res
    * @param {*} next
    */
-  GetListPosts: async function (req, res, next) {
+  GetListPosts: async function (req, res) {
     const { skip = 0, limit } = req.query
     res.status(200).send({ skip, limit })
   },
