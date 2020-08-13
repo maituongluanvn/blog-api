@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { SignIn, SignUp } = require('../../controllers/v1/auth.controller')
+const { SignIn, SignUp } = require(`${global.CONTROLLER_V1}/auth.controller`)
 
 /**
  * @method [POST] v1/signin
