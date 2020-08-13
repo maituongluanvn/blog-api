@@ -2,9 +2,12 @@ const express = require('express')
 const router = express.Router()
 const jwt = require('../../middlewares/verifyToken')
 
-const { get, create } = require('../../controllers/post.controller')
+const { GetListPosts, create } = require('../../controllers/v1/post.controller')
 
-router.get('/', jwt, get)
-router.post('/', create)
+/** GET /post - Get post list */
+router.get('/', jwt, GetListPosts)
+
+/** POST /post - Create one post */
+// router.post('/', create)
 
 module.exports = router

@@ -34,6 +34,8 @@
     "class-methods-use-this": ["off"],
     "no-extra-semi": "off",
     "no-var": "off",
-    "switch-colon-spacing": ["error", {"after": false, "before": true}]
+    "switch-colon-spacing": ["error", {"after": false, "before": true}],
+    "space-before-blocks": ["error", "always"],
+    "no-empty":"off"
   }
 }
