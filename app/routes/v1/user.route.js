@@ -1,12 +1,12 @@
 const express = require('express')
 const router = express.Router()
-const { GetManyUsers } = require(`${global.CONTROLLER_V1}/user.controller`)
+const { GetManyUsers, GetOneUserByID } = require(`${global.CONTROLLER_V1}/user.controller`)
 
 /**
  * @method [GET] v1/user
- * @method [POST] v1/signup
+ * @method [GET] v1/user/:_id
  */
 router.get('/', GetManyUsers)
-// router.post('/signup', SignUp)
+router.get('/:_id', GetOneUserByID)
 
 module.exports = router
