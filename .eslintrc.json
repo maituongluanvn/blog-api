@@ -24,7 +24,7 @@
     "import/no-dynamic-require": ["off"],
     "import/newline-after-import": ["off"],
     "arrow-parens": ["error", "as-needed"],
-    "max-len": ["error", 150],
+    "max-len": ["error", 200],
     "no-underscore-dangle": ["off"],
     "no-multi-assign": ["off"],
     "no-param-reassign": ["off"],
@@ -36,6 +36,8 @@
     "no-var": "off",
     "switch-colon-spacing": ["error", { "after": false, "before": true }],
     "space-before-blocks": ["error", "always"],
-    "no-empty": "off"
+    "no-empty": "off",
+    "no-extra-parens": "off",
+    "no-mixed-operators": "warn"
   }
 }

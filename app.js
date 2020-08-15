@@ -8,7 +8,7 @@ const connectDB = require('./config/db')
 // Load config
 dotenv.config({ path: './config/config.env' })
 // Set globaldir
-require('./config/global-path.js')
+require('./global-path.js')
 connectDB()
 
 const app = express()
