@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 const autoIncrement = require('mongoose-auto-increment')
 var usersSchema = new mongoose.Schema(
   {
-    _id: { type: Number, autoIndex: true, unique: true },
+    // _id: { type: Number, autoIndex: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     password: { type: String, required: true },

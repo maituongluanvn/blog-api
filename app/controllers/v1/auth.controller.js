@@ -8,6 +8,7 @@ async function SignIn(req, res) {
   try {
     const user = await UserModel.findOne({ email: req.body.email })
     const validPassword = await bcrypt.compare(req.body.password, user.password)
+    console.log(req.body.password, user.password)
     if (!user || !validPassword) return res.status(400).send({ message: 'Email or password is not already exist' })
     // create token
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET)

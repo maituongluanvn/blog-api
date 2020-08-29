@@ -16,7 +16,7 @@ async function GetManyUsers(req, res) {
   res.status(200).json({ data })
 }
 
-// @method [POST] Get many user with Params
+// @method [GET] Get one user with Params
 async function GetOneUserByID(req, res) {
   const { _id } = req.params
   // Query user
@@ -26,7 +26,13 @@ async function GetOneUserByID(req, res) {
   if (err) res.status(400).send(err)
   res.status(200).json({ data })
 }
+
+// @method [POST] Update profile user by this user
+async function UpdateProfileUserByUser(req, res) {
+
+}
 module.exports = {
   GetManyUsers,
   GetOneUserByID,
+  UpdateProfileUserByUser,
 }
