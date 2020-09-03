@@ -3,13 +3,13 @@ const dotenv = require('dotenv')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-const connectDB = require('./config/db')
+const connectDB = require('./config/database')
 
 // Load config
 dotenv.config({ path: './config/config.env' })
 // Set globaldir
-require('./config/global-path.js')
-connectDB()
+require('./global-path.js')
+// connectDB()
 
 const app = express()
 
