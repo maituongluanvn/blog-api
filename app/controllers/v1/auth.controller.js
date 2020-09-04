@@ -6,7 +6,9 @@ const pool = require('../../db')
 async function SignIn(req, res) {
   // check email and password is exist
   try {
-    const user = await UserModel.findOne({ where: { email: req.body.email } })
+    const respone = await pool.query(`select * from users where email = '${req.body.email}' limit 1`)
+    const user = respone.rows[0]
+    console.log(user)
     // const user = await UserModel.findOne({ email: req.body.email })
     const validPassword = await bcrypt.compare(req.body.password, user.password)
     if (!user || !validPassword) return res.status(400).send({ message: 'Email or password is not already exist' })
