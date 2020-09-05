@@ -1,17 +1,36 @@
-var mongoose = require('mongoose')
-const autoIncrement = require('mongoose-auto-increment')
-var usersSchema = new mongoose.Schema(
-  {
-    // _id: { type: Number, autoIndex: true },
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
-    password: { type: String, required: true },
-    email: { type: String, required: true },
-    // userID: { type: mongoose.Types.ObjectId, ref: 'users' },
-    role: { type: Number, required: true, default: 20, ref: 'roles' },
+const { Sequelize, DataTypes } = require('sequelize')
+const sequelize = new Sequelize('pjfneujs', 'pjfneujs', 'yxcNyYCIyo0I53zkb5B1FJGbKrCcdpvE', {
+  host: 'topsy.db.elephantsql.com',
+  dialect: 'postgres',
+  pool: {
+    max: 5,
+    min: 0,
+    idle: 10000,
   },
-  { timestamps: true }
-)
-usersSchema.plugin(autoIncrement.plugin, 'users')
+})
 
-module.exports = mongoose.model('users', usersSchema)
+// const { Sequelize, DataTypes } = require('sequelize')
+// const sequelize = new Sequelize('sqlite::memory:')
+
+const users = sequelize.define(
+  'user',
+  {
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING,
+    },
+    role: {
+      type: DataTypes.INTEGER,
+      defaultValue: 20,
+    },
+  },
+  {
+    timestamps: false,
+    // Other model options go here
+  }
+)
+// `sequelize.define` also returns the model
+module.exports = users

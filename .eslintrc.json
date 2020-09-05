@@ -37,7 +37,11 @@
     "switch-colon-spacing": ["error", { "after": false, "before": true }],
     "space-before-blocks": ["error", "always"],
     "no-empty": "off",
+<<<<<<< HEAD
     "no-extra-parens": "off",
     "no-mixed-operators": "warn"
+=======
+    "new-cap": "off"
+>>>>>>> 26ca48c3d53f0c2f6db2459e14d935b53b9f77ba
   }
 }
