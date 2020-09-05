@@ -36,6 +36,7 @@
     "no-var": "off",
     "switch-colon-spacing": ["error", { "after": false, "before": true }],
     "space-before-blocks": ["error", "always"],
-    "no-empty": "off"
+    "no-empty": "off",
+    "new-cap": "off"
   }
 }

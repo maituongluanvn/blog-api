@@ -1,12 +1,13 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
-const UserModel = require(`${global.MODEL}/users.model`)
-
+const pool = require('../../db')
+const { InsertData } = require('../../helper/Query')
 // @method [POST] check User and respone TOKEN
 async function SignIn(req, res) {
   // check email and password is exist
   try {
-    const user = await UserModel.findOne({ email: req.body.email })
+    const respone = await pool.query(`select * from users where email = '${req.body.email}' limit 1`)
+    const user = respone.rows[0]
     const validPassword = await bcrypt.compare(req.body.password, user.password)
     if (!user || !validPassword) return res.status(400).send({ message: 'Email or password is not already exist' })
     // create token
@@ -23,22 +24,21 @@ async function SignIn(req, res) {
 // @method [POST] register user
 async function SignUp(req, res) {
   // check email exist
-  const emailExist = await UserModel.findOne({ email: req.body.email })
-  if (emailExist) return res.status(400).send({ message: 'Email already exist' })
+  try {
+    const emailExist = await pool.query(`select * from users where email = '${req.body.email}'`)
+    if (emailExist.rowCount > 0) return res.status(400).send({ message: 'Email already exist' })
+  } catch (err) {
+    console.log(err)
+  }
   // has password
   const salt = await bcrypt.genSalt(10)
   const hashedPassword = await bcrypt.hash(req.body.password, salt)
-  // create new user
-  const user = await new UserModel({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    password: hashedPassword,
-  })
   try {
+    const result = await InsertData(`INSERT INTO users (email, password, name) VALUES ('${req.body.email}','${hashedPassword}','${req.body.name}')`)
+    console.log(result)
+    // await pool.query()
     // save
-    await UserModel.create(user)
-    res.status(200).send({ status: 'success' })
+    res.status(200).send({ status: true })
   } catch (error) {
     res.status(400).send(error)
   }
