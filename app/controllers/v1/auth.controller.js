@@ -1,15 +1,13 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const pool = require('../../db')
-
+const { InsertData } = require('../../helper/Query')
 // @method [POST] check User and respone TOKEN
 async function SignIn(req, res) {
   // check email and password is exist
   try {
     const respone = await pool.query(`select * from users where email = '${req.body.email}' limit 1`)
     const user = respone.rows[0]
-    console.log(user)
-    // const user = await UserModel.findOne({ email: req.body.email })
     const validPassword = await bcrypt.compare(req.body.password, user.password)
     if (!user || !validPassword) return res.status(400).send({ message: 'Email or password is not already exist' })
     // create token
@@ -36,7 +34,9 @@ async function SignUp(req, res) {
   const salt = await bcrypt.genSalt(10)
   const hashedPassword = await bcrypt.hash(req.body.password, salt)
   try {
-    await pool.query(`INSERT INTO users (email, password, name) VALUES ('${req.body.email}','${hashedPassword}','${req.body.name}')`)
+    const result = await InsertData(`INSERT INTO users (email, password, name) VALUES ('${req.body.email}','${hashedPassword}','${req.body.name}')`)
+    console.log(result)
+    // await pool.query()
     // save
     res.status(200).send({ status: true })
   } catch (error) {
